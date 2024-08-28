@@ -4,6 +4,7 @@ import com.nunes.sports.product.Product;
 import com.nunes.sports.product.ProductRepository;
 import com.nunes.sports.product.ProductRequest;
 import com.nunes.sports.product.ProductResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class productsController {
     }
 
     @PutMapping
+    @Transactional
     public ResponseEntity updateProduct(@RequestBody ProductRequest data) {
         Optional<Product> productData = repository.findById(data.id());
         if (productData.isPresent()) {
@@ -41,11 +43,18 @@ public class productsController {
             product.setName(data.name());
             product.setPrice(data.price());
             product.setDescription(data.description());
-            return ResponseEntity.ok().body(repository.save(product));
+            return ResponseEntity.ok().body(product);
 
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
