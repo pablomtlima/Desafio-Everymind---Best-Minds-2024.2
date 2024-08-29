@@ -1,0 +1,18 @@
+.row {
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+.close,
+.edit {
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+td {
+  justify-content: center;
+}

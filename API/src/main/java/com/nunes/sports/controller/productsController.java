@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5173") // Permita a origem específica do seu frontend
 @RestController
 @RequestMapping("products")
 public class productsController {
@@ -19,7 +20,6 @@ public class productsController {
     @Autowired
     private ProductRepository repository;
 
-    @CrossOrigin (origins = "*",   allowedHeaders = "*")
     @GetMapping
     public List<ProductResponse> getAllProducts() {
 
